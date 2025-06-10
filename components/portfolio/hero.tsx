@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { ArrowRight, Download, Github, Linkedin, Mail } from "lucide-react"
+import { ArrowRight, Download, Github, Linkedin, Mail, Briefcase } from "lucide-react"
 
 export default function PortfolioHero() {
   return (
@@ -38,10 +38,15 @@ export default function PortfolioHero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.8 }}
             >
-              <div className="bg-slate-800/50 p-3 sm:p-4 rounded-lg border border-slate-700/50">
+              <div className="bg-slate-800/50 p-3 sm:p-4 rounded-lg border border-slate-700/50 space-y-2">
                 <div className="text-green-400 mb-1 sm:mb-2 text-xs sm:text-sm">// Currently at Cisco Systems</div>
                 <div className="text-slate-300 text-xs sm:text-sm lg:text-base">
                   Building scalable solutions & optimizing systems
+                </div>
+                <div className="flex items-center gap-2 text-xs sm:text-sm">
+                  <Briefcase size={14} className="text-purple-400" />
+                  <span className="text-purple-400">Freelancer</span>
+                  <span className="text-slate-400">• Open to new projects</span>
                 </div>
               </div>
             </motion.div>
@@ -57,7 +62,7 @@ export default function PortfolioHero() {
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
               >
-                ./connect <ArrowRight size={16} className="sm:w-5 sm:h-5" />
+                ./hire-me <ArrowRight size={16} className="sm:w-5 sm:h-5" />
               </motion.button>
 
               <motion.button
@@ -121,6 +126,9 @@ export default function PortfolioHero() {
                 <div className="text-white whitespace-nowrap">
                   <span className="text-blue-400">company</span>=
                   <span className="text-yellow-400">"Cisco Systems"</span>
+                </div>
+                <div className="text-white whitespace-nowrap">
+                  <span className="text-blue-400">status</span>=<span className="text-purple-400">"Freelancer"</span>
                 </div>
                 <div className="text-white whitespace-nowrap">
                   <span className="text-blue-400">location</span>=

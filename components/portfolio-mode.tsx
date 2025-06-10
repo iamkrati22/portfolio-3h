@@ -7,6 +7,7 @@ import PortfolioAbout from "./portfolio/about"
 import PortfolioSkills from "./portfolio/skills"
 import PortfolioExperience from "./portfolio/experience"
 import PortfolioProjects from "./portfolio/projects"
+// import PortfolioTestimonials from "./portfolio/testimonials"
 import PortfolioContact from "./portfolio/contact"
 import PortfolioFooter from "./portfolio/footer"
 
@@ -27,6 +28,7 @@ export default function PortfolioMode() {
         <PortfolioSkills />
         <PortfolioExperience />
         <PortfolioProjects />
+        {/* <PortfolioTestimonials /> */}
         <PortfolioContact />
       </main>
       <PortfolioFooter />
