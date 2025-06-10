@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion"
 import { useState, useEffect } from "react"
-import { Menu, X } from "lucide-react"
+import { Menu, X, Code, User, Mail } from "lucide-react"
 
 export default function PortfolioHeader() {
   const [scrolled, setScrolled] = useState(false)
@@ -17,12 +17,9 @@ export default function PortfolioHeader() {
   }, [])
 
   const navItems = [
-    { name: "Home", href: "#home" },
-    { name: "About", href: "#about" },
-    { name: "Skills", href: "#skills" },
-    { name: "Experience", href: "#experience" },
-    { name: "Projects", href: "#projects" },
-    { name: "Contact", href: "#contact" },
+    { name: "about", href: "#about", icon: User, prefix: "./", suffix: ".md" },
+    { name: "skills", href: "#skills", icon: Code, prefix: "ls ", suffix: "/" },
+    { name: "contact", href: "#contact", icon: Mail, prefix: "cat ", suffix: ".txt" },
   ]
 
   const handleNavClick = (href: string) => {
@@ -37,7 +34,9 @@ export default function PortfolioHeader() {
   return (
     <motion.header
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        scrolled ? "bg-slate-900/90 backdrop-blur-md border-b border-purple-500/20" : "bg-transparent"
+        scrolled
+          ? "bg-slate-900/95 backdrop-blur-md border-b border-green-500/20 shadow-lg shadow-green-500/5"
+          : "bg-transparent"
       }`}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
@@ -45,12 +44,32 @@ export default function PortfolioHeader() {
     >
       <nav className="container mx-auto px-4 sm:px-6 py-4 sm:py-6">
         <div className="flex items-center justify-between">
-          <motion.div className="text-xl sm:text-2xl font-bold text-white" whileHover={{ scale: 1.05 }}>
-            Krati Jain
+          {/* Logo with terminal styling */}
+          <motion.div
+            className="flex items-center gap-2 text-xl sm:text-2xl font-bold text-white font-mono"
+            whileHover={{ scale: 1.05 }}
+          >
+            <motion.span
+              className="text-green-400"
+              animate={{ opacity: [1, 0.5, 1] }}
+              transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
+            >
+              $
+            </motion.span>
+            <span className="text-white">krati</span>
+            <span className="text-green-400">@</span>
+            <span className="text-blue-400">portfolio</span>
+            <motion.span
+              className="text-green-400"
+              animate={{ opacity: [1, 0] }}
+              transition={{ duration: 1, repeat: Number.POSITIVE_INFINITY }}
+            >
+              _
+            </motion.span>
           </motion.div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
+          <div className="hidden md:flex items-center space-x-1 lg:space-x-2">
             {navItems.map((item, index) => (
               <motion.a
                 key={item.name}
@@ -59,25 +78,42 @@ export default function PortfolioHeader() {
                   e.preventDefault()
                   handleNavClick(item.href)
                 }}
-                className="text-slate-300 hover:text-purple-400 transition-colors text-base lg:text-lg font-medium relative group cursor-pointer"
+                className="group relative px-3 lg:px-4 py-2 rounded-lg transition-all duration-300 hover:bg-slate-800/50 border border-transparent hover:border-green-500/30"
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
                 whileHover={{ y: -2 }}
               >
-                {item.name}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-400 to-pink-400 group-hover:w-full transition-all duration-300"></span>
+                <div className="flex items-center gap-2 font-mono text-sm lg:text-base">
+                  <motion.div className="text-green-400" whileHover={{ rotate: 360 }} transition={{ duration: 0.5 }}>
+                    <item.icon size={16} />
+                  </motion.div>
+                  <span className="text-slate-400 group-hover:text-green-400 transition-colors">{item.prefix}</span>
+                  <span className="text-white group-hover:text-green-400 transition-colors">{item.name}</span>
+                  <span className="text-slate-400 group-hover:text-green-400 transition-colors">{item.suffix}</span>
+                </div>
+
+                {/* Terminal cursor effect */}
+                <motion.div
+                  className="absolute -bottom-1 left-0 h-0.5 bg-green-400 opacity-0 group-hover:opacity-100"
+                  initial={{ width: 0 }}
+                  whileHover={{ width: "100%" }}
+                  transition={{ duration: 0.3 }}
+                />
               </motion.a>
             ))}
           </div>
 
           {/* Mobile Menu Button */}
           <motion.button
-            className="md:hidden p-2 text-white"
+            className="md:hidden p-2 text-white font-mono border border-slate-700 rounded-lg hover:border-green-500/50 transition-colors"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             whileTap={{ scale: 0.95 }}
           >
-            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            <div className="flex items-center gap-2">
+              {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+              <span className="text-xs text-green-400">{mobileMenuOpen ? "close" : "menu"}</span>
+            </div>
           </motion.button>
         </div>
 
@@ -89,23 +125,45 @@ export default function PortfolioHeader() {
             exit={{ opacity: 0, height: 0 }}
             className="md:hidden mt-4 pb-4 border-t border-slate-700/50"
           >
-            <div className="flex flex-col space-y-4 pt-4">
-              {navItems.map((item, index) => (
-                <motion.a
-                  key={item.name}
-                  href={item.href}
-                  onClick={(e) => {
-                    e.preventDefault()
-                    handleNavClick(item.href)
-                  }}
-                  className="text-slate-300 hover:text-purple-400 transition-colors text-lg font-medium cursor-pointer"
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                >
-                  {item.name}
-                </motion.a>
-              ))}
+            <div className="bg-slate-800/30 rounded-lg p-4 mt-4 border border-slate-700/50">
+              <div className="flex items-center gap-2 mb-3 text-green-400 font-mono text-sm">
+                <Code size={16} />
+                <span>Navigation Menu</span>
+              </div>
+
+              <div className="space-y-3">
+                {navItems.map((item, index) => (
+                  <motion.a
+                    key={item.name}
+                    href={item.href}
+                    onClick={(e) => {
+                      e.preventDefault()
+                      handleNavClick(item.href)
+                    }}
+                    className="flex items-center gap-3 p-3 rounded-lg bg-slate-900/50 border border-slate-700/30 hover:border-green-500/50 transition-all duration-300 cursor-pointer group"
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <motion.div className="text-green-400" whileHover={{ rotate: 360 }} transition={{ duration: 0.5 }}>
+                      <item.icon size={18} />
+                    </motion.div>
+
+                    <div className="font-mono text-sm">
+                      <span className="text-slate-400 group-hover:text-green-400 transition-colors">{item.prefix}</span>
+                      <span className="text-white group-hover:text-green-400 transition-colors">{item.name}</span>
+                      <span className="text-slate-400 group-hover:text-green-400 transition-colors">{item.suffix}</span>
+                    </div>
+                  </motion.a>
+                ))}
+              </div>
+
+              <div className="mt-4 pt-3 border-t border-slate-700/50">
+                <div className="text-xs text-slate-500 font-mono">
+                  <span className="text-green-400">$</span> Ready to explore portfolio
+                </div>
+              </div>
             </div>
           </motion.div>
         )}
