@@ -12,6 +12,16 @@ body {
   }
 }
 
+/* Add custom breakpoint for extra small screens */
+@media (min-width: 475px) {
+  .xs\:flex-row {
+    flex-direction: row;
+  }
+  .xs\:inline {
+    display: inline;
+  }
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

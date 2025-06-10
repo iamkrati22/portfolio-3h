@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion"
 import { useState, useEffect } from "react"
-import { Menu, X, Code, User, Mail } from "lucide-react"
+import { Menu, X, User, Code, Mail } from "lucide-react"
 
 export default function PortfolioHeader() {
   const [scrolled, setScrolled] = useState(false)
@@ -42,11 +42,11 @@ export default function PortfolioHeader() {
       animate={{ y: 0 }}
       transition={{ duration: 0.6 }}
     >
-      <nav className="container mx-auto px-4 sm:px-6 py-4 sm:py-6">
+      <nav className="container mx-auto px-4 sm:px-6 py-3 sm:py-4">
         <div className="flex items-center justify-between">
           {/* Logo with terminal styling */}
           <motion.div
-            className="flex items-center gap-2 text-xl sm:text-2xl font-bold text-white font-mono"
+            className="flex items-center gap-1 sm:gap-2 text-base sm:text-xl font-bold text-white font-mono"
             whileHover={{ scale: 1.05 }}
           >
             <motion.span
@@ -57,8 +57,8 @@ export default function PortfolioHeader() {
               $
             </motion.span>
             <span className="text-white">krati</span>
-            <span className="text-green-400">@</span>
-            <span className="text-blue-400">portfolio</span>
+            <span className="text-green-400 hidden xs:inline">@</span>
+            <span className="text-blue-400 hidden xs:inline">portfolio</span>
             <motion.span
               className="text-green-400"
               animate={{ opacity: [1, 0] }}
@@ -106,12 +106,12 @@ export default function PortfolioHeader() {
 
           {/* Mobile Menu Button */}
           <motion.button
-            className="md:hidden p-2 text-white font-mono border border-slate-700 rounded-lg hover:border-green-500/50 transition-colors"
+            className="md:hidden p-1.5 text-white font-mono border border-slate-700 rounded-lg hover:border-green-500/50 transition-colors"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             whileTap={{ scale: 0.95 }}
           >
-            <div className="flex items-center gap-2">
-              {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+            <div className="flex items-center gap-1.5">
+              {mobileMenuOpen ? <X size={16} /> : <Menu size={16} />}
               <span className="text-xs text-green-400">{mobileMenuOpen ? "close" : "menu"}</span>
             </div>
           </motion.button>
@@ -123,15 +123,15 @@ export default function PortfolioHeader() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden mt-4 pb-4 border-t border-slate-700/50"
+            className="md:hidden mt-3 pb-3 border-t border-slate-700/50"
           >
-            <div className="bg-slate-800/30 rounded-lg p-4 mt-4 border border-slate-700/50">
-              <div className="flex items-center gap-2 mb-3 text-green-400 font-mono text-sm">
-                <Code size={16} />
+            <div className="bg-slate-800/30 rounded-lg p-3 mt-3 border border-slate-700/50">
+              <div className="flex items-center gap-2 mb-2 text-green-400 font-mono text-xs">
+                <Code size={14} />
                 <span>Navigation Menu</span>
               </div>
 
-              <div className="space-y-3">
+              <div className="space-y-2">
                 {navItems.map((item, index) => (
                   <motion.a
                     key={item.name}
@@ -140,17 +140,17 @@ export default function PortfolioHeader() {
                       e.preventDefault()
                       handleNavClick(item.href)
                     }}
-                    className="flex items-center gap-3 p-3 rounded-lg bg-slate-900/50 border border-slate-700/30 hover:border-green-500/50 transition-all duration-300 cursor-pointer group"
+                    className="flex items-center gap-2 p-2 rounded-lg bg-slate-900/50 border border-slate-700/30 hover:border-green-500/50 transition-all duration-300 cursor-pointer group"
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.1 }}
                     whileTap={{ scale: 0.98 }}
                   >
                     <motion.div className="text-green-400" whileHover={{ rotate: 360 }} transition={{ duration: 0.5 }}>
-                      <item.icon size={18} />
+                      <item.icon size={14} />
                     </motion.div>
 
-                    <div className="font-mono text-sm">
+                    <div className="font-mono text-xs">
                       <span className="text-slate-400 group-hover:text-green-400 transition-colors">{item.prefix}</span>
                       <span className="text-white group-hover:text-green-400 transition-colors">{item.name}</span>
                       <span className="text-slate-400 group-hover:text-green-400 transition-colors">{item.suffix}</span>
@@ -159,7 +159,7 @@ export default function PortfolioHeader() {
                 ))}
               </div>
 
-              <div className="mt-4 pt-3 border-t border-slate-700/50">
+              <div className="mt-3 pt-2 border-t border-slate-700/50">
                 <div className="text-xs text-slate-500 font-mono">
                   <span className="text-green-400">$</span> Ready to explore portfolio
                 </div>
