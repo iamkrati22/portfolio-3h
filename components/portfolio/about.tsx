@@ -1,0 +1,88 @@
+"use client"
+
+import { motion } from "framer-motion"
+import { useInView } from "framer-motion"
+import { useRef } from "react"
+
+export default function PortfolioAbout() {
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, margin: "-100px" })
+
+  const achievements = [
+    "Google WE Scholar 2021 (Top 200/27,643)",
+    "Ericsson Empowering Girl Scholarship",
+    "Runner-up JUET Builds Hackathon 2022",
+    "40% boost in automation coverage",
+    "30% reduction in query execution time",
+  ]
+
+  return (
+    <section id="about" className="py-20 relative" ref={ref}>
+      <div className="container mx-auto px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-4xl lg:text-6xl font-bold text-white mb-4 font-mono">
+            <span className="text-green-400">$</span> cat about.md
+          </h2>
+        </motion.div>
+
+        <div className="max-w-4xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8 }}
+            className="bg-slate-900/80 backdrop-blur-sm rounded-xl border border-green-500/30 p-8 font-mono"
+          >
+            <div className="flex items-center gap-2 mb-6">
+              <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+              <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+              <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+              <span className="text-green-400 text-sm ml-2">about.md</span>
+            </div>
+
+            <div className="space-y-6 text-white">
+              <div>
+                <h3 className="text-green-400 text-xl mb-3"># About Me</h3>
+                <p className="text-slate-300 leading-relaxed">
+                  Software Engineer passionate about building scalable solutions. Currently at Cisco Systems, focusing
+                  on microservice optimization and system performance improvements.
+                </p>
+              </div>
+
+              <div>
+                <h3 className="text-green-400 text-xl mb-3"># Education</h3>
+                <div className="bg-slate-800/50 p-4 rounded-lg border border-slate-700/50">
+                  <div className="text-white">B.Tech Computer Science Engineering</div>
+                  <div className="text-slate-400">Jaypee University of Engineering & Technology (2020-2024)</div>
+                  <div className="text-green-400">GPA: 8.0/10</div>
+                </div>
+              </div>
+
+              <div>
+                <h3 className="text-green-400 text-xl mb-3"># Key Achievements</h3>
+                <div className="space-y-2">
+                  {achievements.map((achievement, index) => (
+                    <motion.div
+                      key={achievement}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={isInView ? { opacity: 1, x: 0 } : {}}
+                      transition={{ delay: 0.2 + index * 0.1, duration: 0.5 }}
+                      className="flex items-center gap-3 text-slate-300"
+                    >
+                      <span className="text-green-400">•</span>
+                      {achievement}
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  )
+}
