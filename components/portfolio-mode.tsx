@@ -18,6 +18,7 @@ export default function PortfolioMode() {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
       className="bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 min-h-screen"
+      style={{ position: "relative", zIndex: 10 }}
     >
       <PortfolioHeader />
       <main>

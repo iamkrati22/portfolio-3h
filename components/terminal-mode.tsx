@@ -305,6 +305,7 @@ export default function TerminalMode() {
       exit={{ opacity: 0, scale: 0.9 }}
       transition={{ duration: 0.5 }}
       className="min-h-screen bg-slate-900 relative overflow-hidden"
+      style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, zIndex: 40 }}
     >
       <div className="min-h-screen p-4 flex items-center justify-center relative z-10">
         <div className="w-full max-w-6xl h-[90vh] bg-slate-900/90 backdrop-blur-xl border border-green-500/30 rounded-xl overflow-hidden shadow-2xl">

@@ -288,7 +288,7 @@ Response guaranteed within 24 hours for all serious inquiries.
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
       transition={{ duration: 0.3 }}
-      className="font-mono text-sm text-green-400 whitespace-pre-wrap"
+      className="font-mono text-xs sm:text-sm text-green-400 whitespace-pre-wrap overflow-x-auto"
     >
       {displayedText}
       {isTyping && (

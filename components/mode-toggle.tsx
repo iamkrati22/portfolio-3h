@@ -15,6 +15,7 @@ export default function ModeToggle({ isTerminalMode, onToggle }: ModeToggleProps
       initial={{ opacity: 0, scale: 0 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ delay: 0.5, duration: 0.5 }}
+      style={{ zIndex: 100 }} // Ensure highest z-index
     >
       <motion.button
         onClick={onToggle}

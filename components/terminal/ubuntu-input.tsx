@@ -97,18 +97,18 @@ export default function UbuntuTerminalInput({
   }
 
   return (
-    <div className="absolute bottom-0 left-0 right-0 bg-slate-900/90 backdrop-blur-sm border-t border-orange-500/20 p-4">
+    <div className="absolute bottom-0 left-0 right-0 bg-slate-900/90 backdrop-blur-sm border-t border-orange-500/20 p-3 sm:p-4">
       {showSuggestions && suggestions.length > 0 && (
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mb-2 flex flex-wrap gap-2"
+          className="mb-2 flex flex-wrap gap-1.5 sm:gap-2"
         >
           {suggestions.map((suggestion) => (
             <motion.button
               key={suggestion}
               onClick={() => handleSuggestionClick(suggestion)}
-              className="px-3 py-1 bg-orange-500/20 text-orange-400 rounded border border-orange-500/30 hover:bg-orange-500/30 transition-colors text-sm font-mono"
+              className="px-2 sm:px-3 py-1 bg-orange-500/20 text-orange-400 rounded border border-orange-500/30 hover:bg-orange-500/30 transition-colors text-xs sm:text-sm font-mono"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -118,20 +118,20 @@ export default function UbuntuTerminalInput({
         </motion.div>
       )}
 
-      <form onSubmit={handleSubmit} className="flex items-center gap-2">
-        <span className="text-green-400 font-mono text-sm">{getPrompt()}</span>
+      <form onSubmit={handleSubmit} className="flex items-center gap-1 sm:gap-2">
+        <span className="text-green-400 font-mono text-xs sm:text-sm flex-shrink-0">{getPrompt()}</span>
         <input
           ref={inputRef}
           type="text"
           value={input}
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}
-          className="flex-1 bg-transparent text-white font-mono text-sm outline-none placeholder-slate-500"
+          className="flex-1 bg-transparent text-white font-mono text-xs sm:text-sm outline-none placeholder-slate-500 min-w-0"
           placeholder="Type a command... (try 'help' or 'neofetch')"
           autoComplete="off"
         />
         <motion.div
-          className="w-2 h-4 bg-green-400"
+          className="w-1.5 sm:w-2 h-3 sm:h-4 bg-green-400 flex-shrink-0"
           animate={{ opacity: [1, 0] }}
           transition={{ duration: 1, repeat: Number.POSITIVE_INFINITY }}
         />
