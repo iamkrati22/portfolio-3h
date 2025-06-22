@@ -22,8 +22,7 @@ export default function PortfolioContact() {
 
   // Initialize EmailJS
   useEffect(() => {
-    const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || "d1F5D69Lu4GmTP0lf"
-    console.log("EmailJS Public Key:", publicKey)
+    const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || "";
     try {
       emailjs.init(publicKey)
       console.log("EmailJS initialized successfully")
