@@ -152,8 +152,8 @@ export default function PortfolioProjects() {
           className="text-center mb-12 sm:mb-16 lg:mb-20"
         >
           <div className="inline-flex items-center gap-2 mb-4 px-3 sm:px-4 py-1.5 sm:py-2 bg-green-500/10 border border-green-500/30 rounded-full">
-            <Terminal className="w-4 h-4 sm:w-5 sm:h-5 text-green-400" />
-            <span className="text-green-400 text-xs sm:text-sm font-mono">Featured Projects</span>
+            <FolderOpen className="w-4 h-4 sm:w-5 sm:h-5 text-green-400" />
+            <span className="text-green-400 text-xs sm:text-sm font-mono">Projects</span>
           </div>
           
           <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-4 sm:mb-6 font-mono">

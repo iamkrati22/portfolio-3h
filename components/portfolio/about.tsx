@@ -3,6 +3,7 @@
 import { motion } from "framer-motion"
 import { useInView } from "framer-motion"
 import { useRef } from "react"
+import { User } from "lucide-react"
 
 export default function PortfolioAbout() {
   const ref = useRef(null)
@@ -25,6 +26,10 @@ export default function PortfolioAbout() {
           transition={{ duration: 0.8 }}
           className="text-center mb-12 sm:mb-16"
         >
+          <div className="inline-flex items-center gap-2 mb-4 px-3 sm:px-4 py-1.5 sm:py-2 bg-green-500/10 border border-green-500/30 rounded-full">
+            <User className="w-4 h-4 sm:w-5 sm:h-5 text-green-400" />
+            <span className="text-green-400 text-xs sm:text-sm font-mono">About Me</span>
+          </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-4 font-mono">
             <span className="text-green-400">$</span> cat about.md
           </h2>

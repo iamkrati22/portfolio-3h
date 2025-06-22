@@ -258,10 +258,20 @@ export default function PortfolioTestimonials() {
             transition={{ duration: 0.8, delay: 0.8 }}
             className="text-center mt-8 sm:mt-12"
           >
-            <div className="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-2 sm:py-3 bg-green-500/10 border border-green-500/30 rounded-full hover:bg-green-500/20 transition-all duration-300 cursor-pointer group">
+            <button
+              onClick={() => {
+                const contactSection = document.getElementById('contact');
+                if (contactSection) {
+                  contactSection.scrollIntoView({ behavior: 'smooth' });
+                } else {
+                  window.location.hash = '#contact';
+                }
+              }}
+              className="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-2 sm:py-3 bg-green-500/10 border border-green-500/30 rounded-full hover:bg-green-500/20 transition-all duration-300 cursor-pointer group"
+            >
               <span className="text-green-400 text-xs sm:text-sm font-mono">Want to join the wall?</span>
               <span className="text-green-400 text-xs sm:text-sm font-mono group-hover:translate-x-1 transition-transform">→</span>
-            </div>
+            </button>
           </motion.div>
         </div>
       </div>
