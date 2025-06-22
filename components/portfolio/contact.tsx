@@ -4,8 +4,9 @@ import type React from "react"
 
 import { motion } from "framer-motion"
 import { useInView } from "framer-motion"
-import { useRef, useState } from "react"
-import { Send } from "lucide-react"
+import { useRef, useState, useEffect } from "react"
+import { Send, CheckCircle, AlertCircle, Loader2 } from "lucide-react"
+import emailjs from "@emailjs/browser"
 
 export default function PortfolioContact() {
   const ref = useRef(null)
@@ -15,10 +16,59 @@ export default function PortfolioContact() {
     email: "",
     message: "",
   })
+  const [isLoading, setIsLoading] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle")
+  const [statusMessage, setStatusMessage] = useState("")
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // Initialize EmailJS
+  useEffect(() => {
+    const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || "d1F5D69Lu4GmTP0lf"
+    console.log("EmailJS Public Key:", publicKey)
+    try {
+      emailjs.init(publicKey)
+      console.log("EmailJS initialized successfully")
+    } catch (error) {
+      console.error("EmailJS initialization error:", error)
+    }
+  }, [])
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    console.log("Form submitted:", formData)
+    setIsLoading(true)
+    setSubmitStatus("idle")
+    setStatusMessage("")
+
+    const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || "service_6ot04al"
+    const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || "template_r6h5zue"
+
+
+    try {
+      const result = await emailjs.send(
+        serviceId,
+        templateId,
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          message: formData.message,
+          to_name: "Krati Jain",
+          reply_to: formData.email,
+        }
+      )
+
+      if (result.status === 200) {
+        setSubmitStatus("success")
+        setStatusMessage("Message sent successfully! I'll get back to you within 24 hours.")
+        setFormData({ name: "", email: "", message: "" })
+      } else {
+        throw new Error("Failed to send message")
+      }
+    } catch (error) {
+      console.error("EmailJS error:", error)
+      setSubmitStatus("error")
+      setStatusMessage("Failed to send message. Please try again or contact me directly.")
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -26,6 +76,11 @@ export default function PortfolioContact() {
       ...formData,
       [e.target.name]: e.target.value,
     })
+    // Reset status when user starts typing again
+    if (submitStatus !== "idle") {
+      setSubmitStatus("idle")
+      setStatusMessage("")
+    }
   }
 
   const contactInfo = [
@@ -46,13 +101,13 @@ export default function PortfolioContact() {
     },
     {
       key: "github",
-      value: "github.com/kratijain",
-      href: "#",
+      value: "github.com/iamkrati22",
+      href: "https://github.com/iamkrati22",
     },
     {
       key: "linkedin",
-      value: "linkedin.com/in/kratijain",
-      href: "#",
+      value: "linkedin.com/in/iamkrati22",
+      href: "https://www.linkedin.com/in/iamkrati22/",
     },
   ]
 
@@ -164,7 +219,8 @@ export default function PortfolioContact() {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-slate-800/50 border border-slate-700/50 rounded-lg text-green-400 placeholder-slate-500 focus:border-green-500/50 focus:outline-none transition-colors font-mono text-sm sm:text-base"
+                    disabled={isLoading}
+                    className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-slate-800/50 border border-slate-700/50 rounded-lg text-green-400 placeholder-slate-500 focus:border-green-500/50 focus:outline-none transition-colors font-mono text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed"
                     placeholder="Your name"
                   />
                 </div>
@@ -181,7 +237,8 @@ export default function PortfolioContact() {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-slate-800/50 border border-slate-700/50 rounded-lg text-green-400 placeholder-slate-500 focus:border-green-500/50 focus:outline-none transition-colors font-mono text-sm sm:text-base"
+                    disabled={isLoading}
+                    className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-slate-800/50 border border-slate-700/50 rounded-lg text-green-400 placeholder-slate-500 focus:border-green-500/50 focus:outline-none transition-colors font-mono text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed"
                     placeholder="your.email@example.com"
                   />
                 </div>
@@ -197,8 +254,9 @@ export default function PortfolioContact() {
                     value={formData.message}
                     onChange={handleChange}
                     required
+                    disabled={isLoading}
                     rows={4}
-                    className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-slate-800/50 border border-slate-700/50 rounded-lg text-green-400 placeholder-slate-500 focus:border-green-500/50 focus:outline-none transition-colors resize-none font-mono text-sm sm:text-base"
+                    className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-slate-800/50 border border-slate-700/50 rounded-lg text-green-400 placeholder-slate-500 focus:border-green-500/50 focus:outline-none transition-colors resize-none font-mono text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed"
                     placeholder="Tell me about your project..."
                   />
                 </div>
@@ -206,17 +264,47 @@ export default function PortfolioContact() {
                 <div className="text-slate-400 text-sm sm:text-base"># Execute send message</div>
                 <motion.button
                   type="submit"
-                  className="w-full bg-green-500 hover:bg-green-600 text-black px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-mono font-semibold flex items-center justify-center gap-2 transition-all duration-300 text-sm sm:text-base"
-                  whileHover={{ scale: 1.02, y: -2 }}
-                  whileTap={{ scale: 0.98 }}
+                  disabled={isLoading}
+                  className="w-full bg-green-500 hover:bg-green-600 disabled:bg-green-500/50 disabled:cursor-not-allowed text-black px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-mono font-semibold flex items-center justify-center gap-2 transition-all duration-300 text-sm sm:text-base"
+                  whileHover={!isLoading ? { scale: 1.02, y: -2 } : {}}
+                  whileTap={!isLoading ? { scale: 0.98 } : {}}
                 >
-                  <Send size={16} className="sm:w-5 sm:h-5" />
-                  ./send-message.sh
+                  {isLoading ? (
+                    <Loader2 size={16} className="sm:w-5 sm:h-5 animate-spin" />
+                  ) : (
+                    <Send size={16} className="sm:w-5 sm:h-5" />
+                  )}
+                  {isLoading ? "Sending..." : "./send-message.sh"}
                 </motion.button>
 
-                <div className="text-green-400 text-xs sm:text-sm break-words">
-                  echo "Message sent successfully! Response within 24 hours."
-                </div>
+                {/* Status Messages */}
+                {submitStatus === "success" && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="flex items-center gap-2 text-green-400 text-xs sm:text-sm"
+                  >
+                    <CheckCircle size={14} className="sm:w-4 sm:h-4" />
+                    {statusMessage}
+                  </motion.div>
+                )}
+
+                {submitStatus === "error" && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="flex items-center gap-2 text-red-400 text-xs sm:text-sm"
+                  >
+                    <AlertCircle size={14} className="sm:w-4 sm:h-4" />
+                    {statusMessage}
+                  </motion.div>
+                )}
+
+                {submitStatus === "idle" && (
+                  <div className="text-green-400 text-xs sm:text-sm break-words">
+                    echo "Message sent successfully! Response within 24 hours."
+                  </div>
+                )}
               </form>
             </motion.div>
           </div>

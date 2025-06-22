@@ -57,21 +57,27 @@ export default function PortfolioHero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.7, duration: 0.8 }}
             >
-              <motion.button
+              <motion.a
+                href="https://calendly.com/iamkrati22/30min"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="bg-green-500 hover:bg-green-600 text-black px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-mono font-semibold flex items-center justify-center gap-1.5 sm:gap-2 transition-all duration-300 text-xs sm:text-sm"
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
               >
                 ./hire-me <ArrowRight size={14} className="sm:w-4 sm:h-4" />
-              </motion.button>
+              </motion.a>
 
-              <motion.button
+              <motion.a
+                href="https://drive.google.com/file/d/1U_PlU4xuCJrV775eMEHC-l70Y4s6q7NL/view?usp=sharing"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="border border-green-500/50 hover:border-green-400 text-green-400 px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-mono font-semibold flex items-center justify-center gap-1.5 sm:gap-2 transition-all duration-300 hover:bg-green-500/10 text-xs sm:text-sm"
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
               >
                 <Download size={14} className="sm:w-4 sm:h-4" /> resume.pdf
-              </motion.button>
+              </motion.a>
             </motion.div>
 
             <motion.div
@@ -81,13 +87,15 @@ export default function PortfolioHero() {
               transition={{ delay: 0.9, duration: 0.8 }}
             >
               {[
-                { icon: Github, href: "#", label: "GitHub" },
-                { icon: Linkedin, href: "#", label: "LinkedIn" },
+                { icon: Github, href: "https://github.com/iamkrati22", label: "GitHub" },
+                { icon: Linkedin, href: "https://www.linkedin.com/in/iamkrati22/", label: "LinkedIn" },
                 { icon: Mail, href: "mailto:iamkrati22@gmail.com", label: "Email" },
               ].map(({ icon: Icon, href, label }) => (
                 <motion.a
                   key={label}
                   href={href}
+                  target={label === "Email" ? "_self" : "_blank"}
+                  rel={label === "Email" ? "" : "noopener noreferrer"}
                   className="p-2 sm:p-2.5 bg-slate-800/50 backdrop-blur-sm rounded-lg text-slate-400 hover:text-green-400 hover:bg-green-500/10 transition-all duration-300 border border-slate-700/50 hover:border-green-500/50"
                   whileHover={{ scale: 1.1, y: -2 }}
                   whileTap={{ scale: 0.95 }}

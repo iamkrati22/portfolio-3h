@@ -316,9 +316,9 @@ export default function TerminalMode() {
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-green-400 mb-4">
               Welcome to Ubuntu 22.04.3 LTS (GNU/Linux 5.15.0-portfolio x86_64)
               <br />
-              <br />* Documentation: https://krati-portfolio.dev
-              <br />* Management: https://github.com/kratijain
-              <br />* Support: https://linkedin.com/in/kratijain
+              <br />* Documentation: https://github.com/iamkrati22
+              <br />* Management: https://github.com/iamkrati22
+              <br />* Support: https://www.linkedin.com/in/iamkrati22/
               <br />
               <br />
               Last login: {new Date().toLocaleString()} from creative-mind

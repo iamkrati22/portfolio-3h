@@ -193,7 +193,7 @@ Impact: Streamlined placement management for entire university
 
 [02] VM Management System  
 Tech Stack: React | Express.js | PostgreSQL | Docker
-─────────────────────────────────────────────────────────────
+────────────────────────────────────────────────────────────
 Description: Web-based GUI with calendar reservations 
 replacing manual command-line setups.
 
@@ -207,7 +207,7 @@ Impact: Revolutionized infrastructure management workflow
 
 [03] Microservice Performance Optimizer
 Tech Stack: Spring Boot | Kafka | Golang | SQL
-─────────────────────────────────────────────────────────────
+────────────────────────────────────────────────────────────
 Description: Enhanced microservice architecture through 
 automation and design pattern implementation.
 
@@ -221,7 +221,7 @@ Impact: Production-level performance optimization
 
 [04] UX Research Platform
 Tech Stack: React | TypeScript | Figma API | Node.js
-─────────────────────────────────────────────────────────────
+────────────────────────────────────────────────────────────
 Description: Comprehensive UX research tools with wireframing 
 and user interview management capabilities.
 
@@ -233,7 +233,7 @@ Key Achievements:
 
 Impact: Enhanced product development lifecycle
 
-Repository: github.com/kratijain | Portfolio: kratijain.dev
+Repository: github.com/iamkrati22 | Portfolio: github.com/iamkrati22
     `,
     contact: `
 Contact Information
@@ -252,9 +252,9 @@ Contact Information
    Open to: Remote opportunities worldwide
 
 💼 Professional Networks:
-   LinkedIn: linkedin.com/in/kratijain
-   GitHub: github.com/kratijain
-   Portfolio: kratijain.dev
+   LinkedIn: linkedin.com/in/iamkrati22
+   GitHub: github.com/iamkrati22
+   Portfolio: github.com/iamkrati22
    LeetCode: leetcode.com/kratijain
    Codeforces: codeforces.com/profile/kratijain
 
