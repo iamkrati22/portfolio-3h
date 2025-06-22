@@ -10,6 +10,20 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+  
+  .line-clamp-6 {
+    display: -webkit-box;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  .line-clamp-none {
+    display: block;
+    -webkit-line-clamp: unset;
+    -webkit-box-orient: unset;
+    overflow: visible;
+  }
 }
 
 /* Add custom breakpoint for extra small screens */
